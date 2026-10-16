@@ -828,3 +828,14 @@ body.view-control-buttons .viewControlButton {
 .viewControlButton-6 {
   margin-left: 105px;
 }
+
+/* 導覽影片入口與彈出視窗 */
+#videoGuideButton { position:fixed; z-index:100; bottom:22px; left:50%; transform:translateX(-50%); border:1px solid rgba(255,255,255,.65); border-radius:28px; padding:12px 22px; color:#fff; background:rgba(36,53,65,.92); font-size:16px; font-weight:600; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.3); white-space:nowrap; }
+#videoGuideButton:hover { background:rgba(30,85,105,.98); }
+#videoGuideOverlay[hidden] { display:none !important; }
+#videoGuideOverlay { position:fixed; inset:0; z-index:1000; display:flex; justify-content:center; align-items:center; padding:18px; background:rgba(0,0,0,.84); }
+#videoGuidePanel { width:min(960px,100%); max-height:100%; display:flex; flex-direction:column; background:#17222b; border-radius:12px; overflow:hidden; box-shadow:0 15px 60px rgba(0,0,0,.5); }
+#videoGuideHeader { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 16px; color:white; font-size:16px; }
+#videoGuideClose { border:0; border-radius:7px; padding:8px 12px; color:white; background:#4c6170; cursor:pointer; font-size:14px; }
+#videoGuidePlayer { display:block; width:100%; max-height:calc(100vh - 115px); aspect-ratio:16/9; background:#000; object-fit:contain; }
+@media(max-width:500px){ #videoGuideButton { bottom:15px; font-size:14px; padding:11px 18px; } #videoGuideHeader { font-size:13px; } }

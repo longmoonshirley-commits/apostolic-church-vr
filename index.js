@@ -182,7 +182,44 @@
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;');
   }
 
+  // 影片採獨立浮層播放，不更動任何 VR 場景或熱點。
+  var guideButton = document.getElementById('videoGuideButton');
+  var guideOverlay = document.getElementById('videoGuideOverlay');
+  var guidePlayer = document.getElementById('videoGuidePlayer');
+  var guideTitle = document.getElementById('videoGuideTitle');
+  var guideClose = document.getElementById('videoGuideClose');
+  var activeGuideScene = null;
+  var guideVideos = {
+    '0-01_': 'videos/01.mp4',
+    '1-02_': 'videos/02.mp4',
+    '2-03_': 'videos/03.mp4',
+    '3-04_': 'videos/04.mp4',
+    '4-05_': 'videos/05.mp4'
+  };
+  function closeGuideVideo() {
+    guidePlayer.pause();
+    guidePlayer.removeAttribute('src');
+    guidePlayer.load();
+    guideOverlay.hidden = true;
+  }
+  guideButton.addEventListener('click', function() {
+    if (!activeGuideScene) return;
+    guideTitle.textContent = activeGuideScene.name + '｜導覽影片';
+    guidePlayer.src = guideVideos[activeGuideScene.id];
+    guideOverlay.hidden = false;
+    guidePlayer.play().catch(function() { /* 手機瀏覽器可手動按播放 */ });
+  });
+  guideClose.addEventListener('click', closeGuideVideo);
+  guideOverlay.addEventListener('click', function(e) {
+    if (e.target === guideOverlay) closeGuideVideo();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !guideOverlay.hidden) closeGuideVideo();
+  });
+
   function switchScene(scene) {
+    closeGuideVideo();
+    activeGuideScene = scene.data;
     stopAutorotate();
     scene.view.setParameters(scene.data.initialViewParameters);
     scene.scene.switchTo();
