@@ -76,6 +76,14 @@
   <img class="icon" src="img/minus.png">
 </a>
 
+<!-- 每個場景的導覽影片：不影響原有 360° 互動與經文熱點 -->
+<button id="videoGuideButton" type="button" aria-label="觀看本場景導覽影片">▶ 觀看導覽影片</button>
+<div id="videoGuideOverlay" role="dialog" aria-modal="true" aria-label="場景導覽影片" hidden>
+  <div id="videoGuidePanel">
+    <div id="videoGuideHeader"><span id="videoGuideTitle">場景導覽</span><button id="videoGuideClose" type="button" aria-label="關閉影片">✕ 關閉</button></div>
+    <video id="videoGuidePlayer" controls playsinline preload="none"></video>
+  </div>
+</div>
 <script src="vendor/screenfull.min.js" ></script>
 <script src="vendor/bowser.min.js" ></script>
 <script src="vendor/marzipano.js" ></script>
